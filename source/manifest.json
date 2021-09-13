@@ -1,30 +1,45 @@
 {
-	"name": "Awesome Extension",
-	"version": "0.0.0",
-	"description": "An awesome new browser extension",
-	"homepage_url": "https://github.com/awesome-templates/browser-extension-template",
-	"manifest_version": 2,
-	"minimum_chrome_version": "74",
-	"applications": {
-		"gecko": {
-			"id": "awesome-extension@notlmn.github.io",
-			"strict_min_version": "67.0"
-		}
-	},
-	"icons": {
-		"128": "icon.png"
-	},
-	"permissions": [
-		"storage"
-	],
-	"options_ui": {
-		"chrome_style": true,
-		"page": "options.html"
-	},
-	"background": {
-		"persistent": false,
-		"scripts": [
-			"background.js"
-		]
+  "name": "Awesome Extension",
+  "version": "0.0.0",
+  "description": "An awesome new browser extension",
+  "homepage_url": "https://www.redbull.com",
+  "manifest_version": 2,
+  "minimum_chrome_version": "74",
+  "applications": {
+	"gecko": {
+	  "id": "awesome-extension@notlmn.github.io",
+	  "strict_min_version": "67.0"
 	}
+  },
+  "icons": {
+	"128": "icon.png"
+  },
+  "permissions": [
+	"activeTab",
+	"notifications"
+  ],
+  "background": {
+	"scripts": [
+	  "background.ts"
+	]
+  },
+  "browser_action": {
+	"default_icon": {
+	  "38": "icon.png"
+	},
+	"default_title": "Awesome Extension",
+	"default_popup": "popup.html"
+  },
+  "content_scripts": [
+	{
+	  "matches": [
+		"https://todomvc.com/examples/vanillajs/"
+	  ],
+	  "js": [
+		"../node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
+		"contentscript.ts"
+	  ],
+	  "run_at": "document_end"
+	}
+  ]
 }
